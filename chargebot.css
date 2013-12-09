@@ -1,0 +1,456 @@
+sup {
+	font-size: smaller;
+}
+
+html, body {
+	position: absolute;
+	width: 100%;
+	min-width: 990px;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background: #EEE;
+}
+
+div.header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 45px;
+	width: 100%;
+	z-index: 300;
+	border-bottom: 1px solid gray;
+	background: #111;
+}
+div.header-inner {
+	padding: 5px 15px;
+}
+
+.title {
+	font-family: monospace;
+	font-size: 30px;
+	font-weight: bold;
+	color: #0f0;
+}
+
+div.loginmenu {
+	display: none;
+	position: absolute;
+	left: 17%;
+	margin-left: 28px;
+	width: 100px;
+	top: 0;
+	z-index: 200;
+	color: white;
+}
+
+a.loginheader {
+	position: absolute;
+	display: block;
+	top: 15px;
+	width: 100%;
+	text-align: center;
+	font-size: smaller;
+	color: #ccf;
+	font-weight: bold;
+}
+
+div#loginmenu {
+	display: none;
+	margin-left: -27px;
+	margin-top: 45px;
+	width: 145px;
+	background: url(img/semitransparent.png);
+	border: 2px solid black;
+}
+
+a#linklogin {
+	display: block;
+	width: 123px;
+	text-align: center;
+	margin: 10px;
+	color: white;
+}
+
+a#googlelogin {
+	display: block;
+	//background: url(img/Google_base.png);
+	background-image: url(img/Google_button.png);
+	background-position: 0 0;
+	width: 123px;
+	height: 42px;
+	margin: 10px;
+}
+
+a#googlelogin:hover {
+	//background: url(img/Google_hover.png);
+	background-position: 0 -42px;
+}
+
+a#googlelogin:active {
+	//background: url(img/Google_press.png);
+	background-position: 0 -84px;
+}
+
+a#facebooklogin {
+	display: block;
+	//background: url(img/Facebook_base.png);
+	background-image: url(img/Facebook_button.png);
+	background-position: 0 0;
+	width: 123px;
+	height: 43px;
+	margin: 10px;
+}
+
+a#facebooklogin:hover {
+	//background: url(img/Facebook_hover.png);
+	background-position: 0 -43px;
+}
+
+a#facebooklogin:active {
+	//background: url(img/Facebook_press.png);
+	background-position: 0 -86px;
+}
+
+div#loginerror {
+	margin: 5px 10px;
+	text-align: center;
+}
+
+div.username {
+	color: white;
+}
+
+div.logout {
+	display: none;
+	position: absolute;
+	left: 17%;
+	margin-left: 28px;
+	top: 7px;
+	width: 100px;
+	text-align: center;
+	font-size: smaller;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+div.logout a {
+	color: #ccf
+}
+
+div.levelbuttons {
+	position: absolute;
+	top: 0;
+	left: 48%;
+	padding: 10px;
+}
+
+select#chapter {
+	float: left;
+	width: 100px;
+	margin-right: 25px;
+}
+
+span.chapter {
+	display: none;
+}
+
+a.levelbutton {
+	display: block;
+	float: left;
+	width: 22px;
+	height: 22px;
+	margin: 0 3px;
+	background: #aaa;
+	border: 1px solid black;
+	vertical-align: middle;
+}
+a.levelbutton:hover {
+	border: 1px solid white;
+}
+
+a.done {
+	background: #0f0;
+}
+
+a.current {
+	border: 1px solid white;
+}
+
+div.left {
+	position: absolute;
+	left: 2%;
+	top: 45px;
+	bottom: 2%;
+	width: 59%;
+}
+
+div.instructions {
+	position: absolute;
+	width: 100%;
+	top: 0px;
+	bottom: 23px;
+	max-height: 100%;
+	z-index: 100;
+	color: white;
+	font-size: 18px;
+	border-top: 2px solid black;
+}
+
+div.instructions h1, div.messagewindow h1 {
+	font-size: 28px;
+	text-align: center;
+}
+
+div.instructions-bottom {
+	width: 100%;
+	border-top: 2px solid black;
+}
+
+div.instructions-inner {
+	position: relative;
+	max-height: 100%;
+	background: url(img/semitransparent.png);
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	padding: 0px 10px;
+	overflow: auto;
+}
+
+a.showinstr {
+	position: absolute;
+	left: 32%;
+	top: 15px;
+}
+
+div.hidelink {
+	bottom: 0;
+	right: 0;
+	background: url(img/semitransparent.png);
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	text-align: right;
+	padding: 0px 25px;
+}
+div.hidelink a, a.showinstr {
+	font-size: smaller;
+	color: #ccf
+}
+
+div#world {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+img#robot {
+	position: absolute;
+	height: 200px;
+}
+
+div.right {
+	position: absolute;
+	top: 45px;
+	bottom: 2%;
+	right: 2%;
+	width: 34%;
+}
+
+.code {
+	position: absolute;
+	top: 3%;
+	height: 62%;
+	width: 100%;
+	border: 2px solid #0f0;
+}
+
+.executing {
+	background-color: #6f6;
+}
+
+.errorline {
+	background-color: #f55;
+}
+
+.errorlineactive {
+	background-color: #d00 !important;
+}
+
+div.right-seg {
+	position: absolute;
+	top: 65%;
+	height: 35%;
+	width: 100%;
+}
+
+div.output {
+	position: absolute;
+	top: 45px;
+	bottom: 0;
+	width: 100%;
+	overflow: auto;
+	border: 2px solid gray;
+	background: white;
+	font-size: 17px;
+	white-space: pre-wrap;
+	font-family: monospace;
+}
+
+div.output ul {
+	list-style: none;
+	margin: 0;
+	padding: 5px;
+}
+
+div.output li {
+	margin: 2px 5px;
+}
+
+li.progout {
+	color: #0a0;
+}
+
+.errormsg {
+	color: red;
+}
+
+.outputsubtext {
+	font-size: small;
+	font-weight: bold;
+}
+
+div#controls {
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.control-button {
+	font-size: 16px;
+	font-weight: bold;
+	height: 25px;
+	/*background: #999;*/
+}
+
+/*button.control-button:hover {
+	background: #bbb;
+	cursor: pointer;
+	color: white !important;
+}
+
+button.control-button:active {
+	background: #777;
+}
+
+button[disabled="disabled"] {
+	background: #999 !important;
+	color: #888 !important;
+	border: 2px solid #888 !important;
+}
+
+button[disabled="disabled"]:hover {
+	background: #999 !important;
+	color: #888 !important;
+	border: 2px solid #888 !important;
+}*/
+
+button#run {
+	/*border: 2px solid #0f0;
+	color: #0f0;*/
+	color: #2b2;
+}
+
+button#step {
+	/*border: 2px solid #ff0;*/
+	color: #ff0;
+}
+
+button#stop {
+	/*border: 2px solid #f00;*/
+	color: #d00;
+}
+
+button#save {
+	/*border: 2px solid #00f;*/
+	color: #00f;
+}
+
+button#clear {
+	/*border: 2px solid #000;*/
+	color: #000;
+}
+
+button[disabled="disabled"] {
+	color: #888 !important;
+}
+
+span.chargebot {
+	font-weight: bold;
+	font-family: monospace;
+	color: #0f0;
+}
+
+div.messagewindow {
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 450px;
+	height: 240px;
+	margin-top: -120px;
+	margin-left: -225px;
+	z-index: 200;
+	background: url(img/semitransparent.png);
+	border: 2px solid #ddd;
+	color: white;
+}
+
+div.messagewindow a {
+	color: #ccf;
+}
+
+div#epilogue {
+	overflow: auto;
+	height: 210px;
+	padding: 0 15px;
+}
+
+a#hidemwnd {
+	display: block;
+	margin: 5px 15px 0px;
+	text-align: right;
+	font-size: smaller;
+}
+
+div#popframe {
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 450px;
+	height: 240px;
+	margin-top: -120px;
+	margin-left: -225px;
+	z-index: 200;
+	background: url(img/semitransparent.png);
+	border: 2px solid #ddd;
+	color: white;
+}
+
+div#popframe a {
+	color: #ccf;
+}
+
+div#popframe iframe {
+	overflow: auto;
+	width: 450px;
+	height: 210px;
+	padding: 0 15px;
+}
+
+a#hidepopframe {
+	display: block;
+	margin: 5px 15px 0px;
+	text-align: right;
+	font-size: smaller;
+}

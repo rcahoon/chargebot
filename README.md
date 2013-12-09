@@ -4,6 +4,10 @@ ChargeBot
 ChargeBot is an educational game for introducing programming using languages with C-like syntax
 
 
+Setup
+-----
+- Set database access credentials in login/login.js.php
+- Set OAuth credentials for login providers in login/login.php
 
 License
 -------

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CHARGE BOT</title>
+<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+<link rel="stylesheet" href="codemirror.css">
+<script src="codemirror.js"></script>
+<script src="clike.js"></script>
+<script type="text/javascript" src="interpreter.js"></script>
+<script type="text/javascript" src="parser.js"></script>
+<script type="text/javascript" src="subcc.js"></script>
+<script type="text/javascript" src="chargebot.js"></script>
+<script type="text/javascript" src="world.js"></script>
+<script type="text/javascript">
+var s = document.createElement('script');
+s.type = 'text/javascript';
+s.src = 'login/login.js.php?map='+window.worldMap;
+$('head').get(0).appendChild(s);
+</script>
+<link rel="stylesheet" href="chargebot.css">
+</head>
+<body>
+<div class="header">
+<div class="header-inner">
+<span class="title">CHARGEBOT</span>
+<div class="loginmenu">
+<a href="#" class="loginheader">LOG IN</a>
+<div id="loginmenu">
+<a href="#" id="googlelogin"></a>
+<a href="#" id="facebooklogin"></a>
+<a href="#" id="linklogin">New URL User</a>
+<div id="loginerror"></div>
+</div>
+</div>
+<div class="logout">
+<div class="username"></div>
+<a href="#" id="logout">LOGOUT</a>
+</div>
+<a href="#" class="showinstr">SHOW INSTRUCTIONS</a>
+<div class="levelbuttons">
+<select id="chapter">
+<option value="c01">Chapter 1</option>
+<option value="c02">Chapter 2</option>
+<option value="c03">Chapter 3</option>
+</select>
+<span class="chapter" id="c01">
+<a href="?map=c01l01" id="c01l01" class="levelbutton" title="Level 1"></a>
+<a href="?map=c01l02" id="c01l02" class="levelbutton" title="Level 2"></a>
+<a href="?map=c01l03" id="c01l03" class="levelbutton" title="Level 3"></a>
+<a href="?map=c01l04" id="c01l04" class="levelbutton" title="Level 4"></a>
+<a href="?map=c01l05" id="c01l05" class="levelbutton" title="Level 5"></a>
+<a href="?map=c01l06" id="c01l06" class="levelbutton" title="Level 6"></a>
+<a href="?map=c01l07" id="c01l07" class="levelbutton" title="Level 7"></a>
+<a href="?map=c01l08" id="c01l08" class="levelbutton" title="Level 8"></a>
+<a href="?map=c01l09" id="c01l09" class="levelbutton" title="Level 9"></a>
+<a href="?map=c01l10" id="c01l10" class="levelbutton" title="Level 10"></a>
+<a href="?map=c01l11" id="c01l11" class="levelbutton" title="Level 11"></a>
+<a href="?map=c01l12" id="c01l12" class="levelbutton" title="Level 12"></a>
+</span>
+<span class="chapter" id="c02">
+<a href="?map=c02l01" id="c02l01" class="levelbutton" title="Level 1"></a>
+<a href="?map=c02l02" id="c02l02" class="levelbutton" title="Level 2"></a>
+<a href="?map=c02l03" id="c02l03" class="levelbutton" title="Level 3"></a>
+<a href="?map=c02l04" id="c02l04" class="levelbutton" title="Level 4"></a>
+<a href="?map=c02l05" id="c02l05" class="levelbutton" title="Level 5"></a>
+<a href="?map=c02l06" id="c02l06" class="levelbutton" title="Level 6"></a>
+<a href="?map=c02l07" id="c02l07" class="levelbutton" title="Level 7"></a>
+<a href="?map=c02l08" id="c02l08" class="levelbutton" title="Level 8"></a>
+<a href="?map=c02l09" id="c02l09" class="levelbutton" title="Level 9"></a>
+<a href="?map=c02l10" id="c02l10" class="levelbutton" title="Level 10"></a>
+<a href="?map=c02l11" id="c02l11" class="levelbutton" title="Level 11"></a>
+<a href="?map=c02l12" id="c02l12" class="levelbutton" title="Level 12"></a>
+</span>
+<span class="chapter" id="c03">
+<a href="?map=c03l01" id="c03l01" class="levelbutton" title="Level 1"></a>
+<a href="?map=c03l02" id="c03l02" class="levelbutton" title="Level 2"></a>
+<a href="?map=c03l03" id="c03l03" class="levelbutton" title="Level 3"></a>
+<a href="?map=c03l04" id="c03l04" class="levelbutton" title="Level 4"></a>
+<a href="?map=c03l05" id="c03l05" class="levelbutton" title="Level 5"></a>
+<a href="?map=c03l06" id="c03l06" class="levelbutton" title="Level 6"></a>
+<a href="?map=c03l07" id="c03l07" class="levelbutton" title="Level 7"></a>
+<a href="?map=c03l08" id="c03l08" class="levelbutton" title="Level 8"></a>
+<a href="?map=c03l09" id="c03l09" class="levelbutton" title="Level 9"></a>
+<a href="?map=c03l10" id="c03l10" class="levelbutton" title="Level 10"></a>
+<a href="?map=c03l11" id="c03l11" class="levelbutton" title="Level 11"></a>
+<a href="?map=c03l12" id="c03l12" class="levelbutton" title="Level 12"></a>
+</span>
+</div>
+</div>
+</div>
+<div class="left">
+<div class="instructions">
+<div class="instructions-inner">
+<div id="instructions">
+</div>
+</div>
+<div class="hidelink"><a href="#" class="hideinstr">CLOSE</a></div>
+<div class="instructions-bottom"></div>
+</div>
+<div id="world">
+<img id="robot" />
+</div>
+</div>
+
+<div class="right">
+<div class="code">
+</div>
+<div class="right-seg">
+<div id="controls">
+<button id="run" disabled="disabled" class="control-button">Run</button>
+<button id="step" disabled="disabled" class="control-button">Step</button>
+<button id="stop" disabled="disabled" class="control-button">Stop</button>
+<button id="save" disabled="disabled" class="control-button">Save</button>
+</div>
+<div class="output"><ul id="output"></ul></div>
+</div>
+</div>
+
+<div class="messagewindow">
+<div id="epilogue"></div>
+<a href="#" id="hidemwnd">CLOSE</a>
+</div>
+
+<div id="popframe">
+<iframe></iframe>
+<a href="#" id="hidepopframe">CLOSE</a>
+</div>
+</body>
+</html>
