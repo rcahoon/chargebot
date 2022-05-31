@@ -146,33 +146,33 @@ return function(code) {
 })();
 
 function StringSet() {
-    var setObj = {}, val = {};
+	var setObj = {}, val = {};
 
-    this.add = function(str) {
-        setObj[str] = val;
-    };
+	this.add = function(str) {
+		setObj[str] = val;
+	};
 
-    this.contains = function(str) {
-        return setObj[str] === val;
-    };
+	this.contains = function(str) {
+		return setObj[str] === val;
+	};
 
-    this.remove = function(str) {
-        delete setObj[str];
-    };
-	
+	this.remove = function(str) {
+		delete setObj[str];
+	};
+
 	this.clear = function() {
 		setObj = {};
 	};
 
-    this.values = function() {
-        var values = [];
-        for (var i in setObj) {
-            if (setObj[i] === val) {
-                values.push(i);
-            }
-        }
-        return values;
-    };
+	this.values = function() {
+		var values = [];
+		for (var i in setObj) {
+			if (setObj[i] === val) {
+				values.push(i);
+			}
+		}
+		return values;
+	};
 }
 
 var parser = (function() {

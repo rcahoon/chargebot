@@ -1,11 +1,11 @@
 if (typeof Object.create === 'undefined') { 
-  Object.create = function (o) {
-    function F() {};
-    
-    F.prototype = o;
-    
-    return new F();
-  };
+	Object.create = function (o) {
+		function F() {};
+
+		F.prototype = o;
+
+		return new F();
+	};
 }
 
 /*function writeCont(msg, cont)
@@ -44,8 +44,12 @@ function dump(arr,maxlevel,level) {
 function interpreter(ast, baseEnv, onstep)
 {
 	function ParseError(node, msg)
-	{		var ex;		if (typeof someVar === 'string')
-			ex = new Error(msg);		else			ex = msg;
+	{
+		var ex;
+		if (typeof someVar === 'string')
+			ex = new Error(msg);
+		else
+			ex = msg;
 		ex.location = node.loc;
 		throw ex;
 	}
@@ -179,8 +183,12 @@ function interpreter(ast, baseEnv, onstep)
 				var finished = false;
 				
 				var args = [ function(retVal) { finished = true; cont(retVal, func.datatype); } ];
-				stack.push(function() {					try {
-						func.func.apply(func, args);					} catch(ex) {						ParseError(node, ex);					}
+				stack.push(function() {
+					try {
+						func.func.apply(func, args);
+					} catch(ex) {
+						ParseError(node, ex);
+					}
 					
 					//TODO: make this an asynchronous wait
 					function waitOn()

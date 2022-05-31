@@ -6,7 +6,7 @@ $(function() {
 		indentWithTabs: true,
 		tabSize: 4,
 		indentUnit: 4
-    });
+	});
 	
 	window.logRecord = '';
 	
@@ -213,7 +213,25 @@ $(function() {
 					func: function(cb) {
 						cb(window.world.getRightMotor());
 					}
-				},				clearLeftEncoder: {					type: 'Intrinsic',					datatype: 'VOID',					params: [],					func: function(cb) {						window.world.clearLeftEncoder();						cb();					}				},				clearRightEncoder: {					type: 'Intrinsic',					datatype: 'VOID',					params: [],					func: function(cb) {						window.world.clearRightEncoder();						cb();					}				},
+				},
+				clearLeftEncoder: {
+					type: 'Intrinsic',
+					datatype: 'VOID',
+					params: [],
+					func: function(cb) {
+						window.world.clearLeftEncoder();
+						cb();
+					}
+				},
+				clearRightEncoder: {
+					type: 'Intrinsic',
+					datatype: 'VOID',
+					params: [],
+					func: function(cb) {
+						window.world.clearRightEncoder();
+						cb();
+					}
+				},
 				getLeftEncoder: {
 					type: 'Intrinsic',
 					datatype: 'FLOAT',
@@ -307,7 +325,9 @@ $(function() {
 				{
 					runningAction.clear();
 					runningAction = null;
-				}								window.world.stop();
+				}
+				
+				window.world.stop();
 				
 				if (aborted)
 				{

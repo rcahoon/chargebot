@@ -1,5 +1,5 @@
 function Timeout(fn, interval) {
-    var me = this;
+	var me = this;
 	var id = setTimeout(function() {
 		if (me.cleared)
 			return;
@@ -7,18 +7,18 @@ function Timeout(fn, interval) {
 		me.cleared = true;
 		fn();
 	}, interval);
-    me.cleared = false;
-    me.clear = function () {
+	me.cleared = false;
+	me.clear = function () {
 		if (me.cleared)
 			return;
 		
-        me.cleared = true;
-        clearTimeout(id);
-    };
+		me.cleared = true;
+		clearTimeout(id);
+	};
 }
 
 function Interval(fn, interval) {
-    var me = this;
+	var me = this;
 	var id = setInterval(function() {
 		if (me.cleared)
 			return;
@@ -26,14 +26,14 @@ function Interval(fn, interval) {
 		me.cleared = true;
 		fn(interval/1000.0);
 	}, interval);
-    me.cleared = false;
-    me.clear = function () {
+	me.cleared = false;
+	me.clear = function () {
 		if (me.cleared)
 			return;
 		
-        me.cleared = true;
-        clearInterval(id);
-    };
+		me.cleared = true;
+		clearInterval(id);
+	};
 }
 
 function World(dfunc, initialI, initialJ, initialState, initialOrient, goal) {
@@ -60,7 +60,7 @@ function World(dfunc, initialI, initialJ, initialState, initialOrient, goal) {
 		robotOrients[i] = 'img/robot/' + i + '.png';
 		$('<img/>').attr('src', robotOrients[i]);
 	}
-	
+
 	this.getRobotI = function() { return robotI; };
 	this.getRobotJ = function() { return robotJ; };
 	
@@ -373,14 +373,14 @@ function World(dfunc, initialI, initialJ, initialState, initialOrient, goal) {
 }
 
 var createWorld = (function() {
-    function F(args) {
-        return World.apply(this, args);
-    }
-    F.prototype = World.prototype;
+	function F(args) {
+		return World.apply(this, args);
+	}
+	F.prototype = World.prototype;
 
-    return function() {
-        window.world = new F(arguments);
-    }
+	return function() {
+		window.world = new F(arguments);
+	}
 })();
 
 function getQueryParameterByName(name) {

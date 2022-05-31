@@ -12,9 +12,9 @@ function makeLocation(_$) {
 }
 
 if (typeof Date.now === 'undefined') {
-  Date.now = function now() {
-    return new Date().getTime();
-  };
+	Date.now = function now() {
+		return new Date().getTime();
+	};
 }
 
 function subcc(code, base_env, onerror) {
