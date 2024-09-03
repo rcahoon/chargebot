@@ -96,7 +96,7 @@ function World(dfunc, initialI, initialJ, initialState, initialOrient, goal) {
 			top: (tileY(robotI, robotJ, elv[Math.round(robotI)][Math.round(robotJ)] + zoff)-ystep*.75)+'%',
 			width: xsize*0.5+'%',
 			height: ysize*1+'%',
-			zIndex: Math.round(robotI)+Math.round(robotJ)+1
+			zIndex: ((robotI+0.7)|0)+((robotJ+0.7)|0)+1
 		});
 	}
 	
@@ -211,13 +211,14 @@ function World(dfunc, initialI, initialJ, initialState, initialOrient, goal) {
 	}
 	
 	this.getTileColor = function(cb) {
-		stop();
+		var color = tile[Math.round(robotI)][Math.round(robotJ)];
 		return new Timeout(function () {
-			cb(tile[Math.round(robotI)][Math.round(robotJ)]);
+			cb(color);
 		}, 400);
 	}
 	
 	this.robotForward = function(cb) {
+		stop();
 		var updateI = robotI, updateJ = robotJ;
 		switch(orient)
 		{
@@ -242,6 +243,7 @@ function World(dfunc, initialI, initialJ, initialState, initialOrient, goal) {
 		return new Timeout(cb, 400);
 	};
 	this.robotJump = function(cb) {
+		stop();
 		var updateI = robotI, updateJ = robotJ;
 		switch(orient)
 		{
@@ -270,32 +272,70 @@ function World(dfunc, initialI, initialJ, initialState, initialOrient, goal) {
 		}, 300);
 	};
 	this.robotTurnLeft = function(cb) {
+		stop();
 		orient += 3;
 		orient %= 4;
 		updateRobot();
 		return new Timeout(cb, 400);
 	};
 	this.robotTurnRight = function(cb) {
+		stop();
 		orient += 1;
 		orient %= 4;
 		updateRobot();
 		return new Timeout(cb, 400);
 	};
 	this.chargeTile = function(cb) {
-		if (tile[Math.round(robotI)][Math.round(robotJ)] == 'B') {
-			tile[Math.round(robotI)][Math.round(robotJ)] = 'G';
-			map[Math.round(robotI)][Math.round(robotJ)][elv[Math.round(robotI)][Math.round(robotJ)]].attr('src', imgx.G);
-		}
-		stop();
-		return new Timeout(cb, 400);
+		var startI = Math.round(robotI);
+		var startJ = Math.round(robotJ);
+		return new Timeout(function() {
+			var tileI = Math.round(robotI);
+			var tileJ = Math.round(robotJ);
+			if (tileI == startI && tileJ == startJ)
+			{
+				if (tile[tileI][tileJ] == 'B')
+				{
+					tile[Math.round(robotI)][Math.round(robotJ)] = 'G';
+					map[Math.round(robotI)][Math.round(robotJ)][elv[Math.round(robotI)][Math.round(robotJ)]].attr('src', imgx.G);
+				}
+				else
+				{
+					throw new Error("CHARGEBOT can only charge unpowered (blue) tiles");
+				}
+			}
+			else
+			{
+				throw new Error("CHARGEBOT needs to stay still while it's charging a tile");
+			}
+			
+			cb();
+		}, 400);
 	};
 	this.drainTile = function(cb) {
-		if (tile[Math.round(robotI)][Math.round(robotJ)] == 'G') {
-			tile[Math.round(robotI)][Math.round(robotJ)] = 'B';
-			map[Math.round(robotI)][Math.round(robotJ)][elv[Math.round(robotI)][Math.round(robotJ)]].attr('src', imgx.B);
-		}
-		stop();
-		return new Timeout(cb, 400);
+		var startI = Math.round(robotI);
+		var startJ = Math.round(robotJ);
+		return new Timeout(function() {
+			var tileI = Math.round(robotI);
+			var tileJ = Math.round(robotJ);
+			if (tileI == startI && tileJ == startJ)
+			{
+				if (tile[tileI][tileJ] == 'G')
+				{
+					tile[tileI][tileJ] = 'B';
+					map[tileI)][tileJ][elv[tileI][tileJ]].attr('src', imgx.B);
+				}
+				else
+				{
+					throw new Error("CHARGEBOT can only drain powered (green) tiles");
+				}
+			}
+			else
+			{
+				throw new Error("CHARGEBOT needs to stay still while it's draining a tile");
+			}
+			
+			cb();
+		}, 400);
 	};
 	
 	var leftMotor = 0;

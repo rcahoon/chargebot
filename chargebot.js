@@ -75,6 +75,9 @@ $(function() {
 					datatype: 'VOID',
 					params: [],
 					func: function(cb) {
+						if (window.stepless)
+							throw new Error("moveForward doesn't exist anymore");
+						
 						runningAction = window.world.robotForward(cb);
 					}
 				},
@@ -83,6 +86,9 @@ $(function() {
 					datatype: 'VOID',
 					params: [ 'INT' ],
 					func: function(cb, count) {
+						if (window.stepless)
+							throw new Error("moveForwardFor doesn't exist anymore");
+						
 						function worker()
 						{
 							if (count > 0)
@@ -101,6 +107,9 @@ $(function() {
 					datatype: 'VOID',
 					params: [],
 					func: function(cb) {
+						if (window.stepless)
+							throw new Error("turnLeft doesn't exist anymore");
+						
 						runningAction = window.world.robotTurnLeft(cb);
 					}
 				},
@@ -109,6 +118,9 @@ $(function() {
 					datatype: 'VOID',
 					params: [ 'INT' ],
 					func: function(cb, count) {
+						if (window.stepless)
+							throw new Error("turnLeftFor doesn't exist anymore");
+						
 						function worker()
 						{
 							if (count > 0)
@@ -127,6 +139,9 @@ $(function() {
 					datatype: 'VOID',
 					params: [],
 					func: function(cb) {
+						if (window.stepless)
+							throw new Error("turnRight doesn't exist anymore");
+						
 						runningAction = window.world.robotTurnRight(cb);
 					}
 				},
@@ -135,6 +150,9 @@ $(function() {
 					datatype: 'VOID',
 					params: [ 'INT' ],
 					func: function(cb, count) {
+						if (window.stepless)
+							throw new Error("turnRightFor doesn't exist anymore");
+						
 						function worker()
 						{
 							if (count > 0)
@@ -164,20 +182,28 @@ $(function() {
 						runningAction = window.world.drainTile(cb);
 					}
 				},
-				jump: {
+				/*jump: {
 					type: 'Intrinsic',
 					datatype: 'VOID',
 					params: [],
 					func: function(cb) {
 						runningAction = window.world.robotJump(cb);
 					}
-				},
+				},*/
 				getTileColor: {
 					type: 'Intrinsic',
 					datatype: 'STRING',
 					params: [],
 					func: function(cb) {
 						runningAction = window.world.getTileColor(cb);
+					}
+				},
+				waitForSeconds: {
+					type: 'Intrinsic',
+					datatype: 'VOID',
+					params: [ 'FLOAT' ],
+					func: function(cb, period) {
+						new Timeout(cb, period * 1000);
 					}
 				},
 				setLeftMotor: {
@@ -253,6 +279,14 @@ $(function() {
 				{
 					window.codeEditor.removeLineClass(execHL.pop(), 'background');
 				}
+				
+				if (runningAction !== null)
+				{
+					runningAction.clear();
+					runningAction = null;
+				}
+				
+				window.world.stop();
 				
 				var msg = '<div class="errormsg">' + err.message;
 				

@@ -1,4 +1,5 @@
-var mapColorsGoal = [[]];var mapPrintGoal;
+var mapColorsGoal = [[]];
+var mapPrintGoal;
 
 createWorld(function() {
 	var colors = [ 'L','B','R','G','W','Y','M','T' ];
@@ -72,19 +73,75 @@ createWorld(function() {
 	[ 'L0', 'L0', 'L0', 'L0', 'L0', 'L0', 'L0', 'L0' ],
 	[ 'L0', 'L0', 'L0', 'L0', 'L0', 'L0', 'L0', 'L0' ]
 	];
-		mapPrintGoal = '';		var orient = 1;
+	
+	mapPrintGoal = '';
+	
+	var orient = 1;
 	for(var node = graph[0][0]; node !== terminal; node = node[0])
-	{		var c;		if (node[0] == terminal)		{			c = 'R';		}		else		{			var nh;			if (node[2] - node[0][2] == -1)				nh = 2;			else if (node[2] - node[0][2] == 1)				nh = 0;			else if (node[1] - node[0][1] == 1)				nh = 3;			else if (node[1] - node[0][1] == -1)				nh = 1;						var turn = nh - orient;						if (turn == -1)				c = 'M';			else if (turn == 1)				c = 'Y';			else if (Math.random() < 0.35)				c = 'B';			else if (Math.random() < 0.25)				c = 'G';			else				c = 'W';						orient = nh;		}				if (c == 'G')			mapPrintGoal += "I'm a little teapot\n";		
-		mapData[node[1]][node[2]] = c + '1';		if (c == 'B')			c = 'G';		mapColorsGoal[node[1]][node[2]] = c + '1';
-	}	
+	{
+		var c;
+		if (node[0] == terminal)
+		{
+			c = 'R';
+		}
+		else
+		{
+			var nh;
+			if (node[2] - node[0][2] == -1)
+				nh = 2;
+			else if (node[2] - node[0][2] == 1)
+				nh = 0;
+			else if (node[1] - node[0][1] == 1)
+				nh = 3;
+			else if (node[1] - node[0][1] == -1)
+				nh = 1;
+			
+			var turn = nh - orient;
+			
+			if (turn == -1)
+				c = 'M';
+			else if (turn == 1)
+				c = 'Y';
+			else if (Math.random() < 0.35)
+				c = 'B';
+			else if (Math.random() < 0.25)
+				c = 'G';
+			else
+				c = 'W';
+			
+			orient = nh;
+		}
+		
+		if (c == 'G')
+			mapPrintGoal += "I'm a little teapot\n";
+		
+		mapData[node[1]][node[2]] = c + '1';
+		if (c == 'B')
+			c = 'G';
+		mapColorsGoal[node[1]][node[2]] = c + '1';
+	}
+	
 	return mapData;
-}, 0, 0, 0, 1, function() {	if (window.logRecord != mapPrintGoal) {		window.writeLog('Your program printed:\n' + window.logRecord);		window.writeLog('It should have been:\n' + mapPrintGoal);		return false;	}		if (window.world.getRobotI() != 7 || window.world.getRobotJ() != 7)	{		window.writeLog('Chargebot didn\'t make it to the end of the course');		return false;	}	
+}, 0, 0, 0, 1, function() {
+	if (window.logRecord != mapPrintGoal) {
+		window.writeLog('Your program printed:\n' + window.logRecord);
+		window.writeLog('It should have been:\n' + mapPrintGoal);
+		return false;
+	}
+	
+	if (window.world.getRobotI() != 7 || window.world.getRobotJ() != 7)
+	{
+		window.writeLog('Chargebot didn\'t make it to the end of the course');
+		return false;
+	}
+	
 	return mapColorsGoal;
 });
 
 $("#instructions").html(
 '<h1>Program By Colors</h1>' +
-'<p>For this challenge, program <span class="chargebot">CHARGEBOT</span> so he reacts to tile ' +'colors in the following ways:</p>' +
+'<p>For this challenge, program <span class="chargebot">CHARGEBOT</span> so he reacts to tile ' +
+'colors in the following ways:</p>' +
 '<ul>' +
 '<li>White &rarr; Move forward</li>' +
 '<li>Blue &rarr; Charge tile and Move forward</li>' +
@@ -92,7 +149,18 @@ $("#instructions").html(
 '<li>Yellow &rarr; Turn right and Move forward</li>' +
 '<li>Red &rarr; Stop</li>' +
 '<li>Green &rarr; Print "I\'m a little teapot" and Move forward</li>' +
-'</ul>' +'<p>So far, you\'ve used <span style="font-family: monospace">==</span> to check if two things ' +'are equal, and <span style="font-family: monospace">&lt;</span> to check if something is ' +'less than something else. To help you out, here\'s a list of other comparisons you can make:</p>' +'<table style="border-spacing: 15px 2px">' +'<tr><td><span style="font-family: monospace">==</span></td><td>equals</td></tr>' +'<tr><td><span style="font-family: monospace">!=</span></td><td>not equals</td></tr>' +'<tr><td><span style="font-family: monospace">&lt;</span></td><td>less than</td></tr>' +'<tr><td><span style="font-family: monospace">&gt;</span></td><td>greater than</td></tr>' +'<tr><td><span style="font-family: monospace">&lt;=</span></td><td>less than or equal to</td></tr>' +'<tr><td><span style="font-family: monospace">&gt;=</span></td><td>greater than or equal to</td></tr>' +'</table>');
+'</ul>' +
+'<p>So far, you\'ve used <span style="font-family: monospace">==</span> to check if two things ' +
+'are equal, and <span style="font-family: monospace">&lt;</span> to check if something is ' +
+'less than something else. To help you out, here\'s a list of other comparisons you can make:</p>' +
+'<table style="border-spacing: 15px 2px">' +
+'<tr><td><span style="font-family: monospace">==</span></td><td>equals</td></tr>' +
+'<tr><td><span style="font-family: monospace">!=</span></td><td>not equals</td></tr>' +
+'<tr><td><span style="font-family: monospace">&lt;</span></td><td>less than</td></tr>' +
+'<tr><td><span style="font-family: monospace">&gt;</span></td><td>greater than</td></tr>' +
+'<tr><td><span style="font-family: monospace">&lt;=</span></td><td>less than or equal to</td></tr>' +
+'<tr><td><span style="font-family: monospace">&gt;=</span></td><td>greater than or equal to</td></tr>' +
+'</table>');
 
 $("#epilogue").html(
 '<h1>WELL&nbsp;&nbsp;DONE!</h1>' +

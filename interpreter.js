@@ -1,9 +1,9 @@
 if (typeof Object.create === 'undefined') { 
 	Object.create = function (o) {
 		function F() {};
-
+		
 		F.prototype = o;
-
+		
 		return new F();
 	};
 }
@@ -46,7 +46,7 @@ function interpreter(ast, baseEnv, onstep)
 	function ParseError(node, msg)
 	{
 		var ex;
-		if (typeof someVar === 'string')
+		if (typeof msg === 'string')
 			ex = new Error(msg);
 		else
 			ex = msg;
@@ -194,7 +194,10 @@ function interpreter(ast, baseEnv, onstep)
 					function waitOn()
 					{
 						if (!finished)
+						{
+							window.world.step();
 							stack.push(waitOn);
+						}
 					}
 					waitOn();
 				});
